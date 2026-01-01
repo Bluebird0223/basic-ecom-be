@@ -57,7 +57,7 @@ const swaggerOptions = {
      * apis: Tells swagger-jsdoc where to look for your documentation comments (JSDoc).
      * Usually, these comments are in your route files or a separate documentation file.
      */
-    apis: ['./routes/*.js', './controllers/*.js', './index.js'],
+    apis: ['./src/routes/*.js', './src/controllers/*.js', './index.js'],
 };
 
 /**

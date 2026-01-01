@@ -25,6 +25,17 @@ const limiter = rateLimit({
 
 // Middleware
 app.use(helmet());
+// Middleware to ensure DB connection (Critical for Vercel)
+app.use(async (req, res, next) => {
+  try {
+    await connectDatabase();
+    next();
+  } catch (error) {
+    logger.error('Database connection failed in middleware:', error);
+    res.status(500).json({ success: false, message: 'Database connection error' });
+  }
+});
+
 app.use(cors());
 app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
 app.use(limiter);
