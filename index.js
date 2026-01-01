@@ -85,4 +85,10 @@ process.on('SIGINT', () => {
   process.exit(0);
 });
 
-startServer();
+// Export app for Vercel
+module.exports = app;
+
+// Only start server if not running in production/Vercel or if explicitly required
+if (require.main === module) {
+  startServer();
+}
