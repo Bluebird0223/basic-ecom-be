@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const User = require('../src/models/User');
-const Product = require('../src/models/Product');
+const User = require('../models/User');
+const Product = require('../models/Product');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
@@ -25,8 +25,8 @@ const TEST_PRODUCT = {
 async function verify() {
     try {
         console.log('Connecting to database...');
-        // Matching src/config/database.js logic
-        const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/node-backend';
+        // Matching config/database.js logic
+        const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017';
         const DB_NAME = process.env.DB_NAME || 'node-backend';
 
         await mongoose.connect(MONGODB_URI, { dbName: DB_NAME });
