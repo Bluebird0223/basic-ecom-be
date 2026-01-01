@@ -4,13 +4,14 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const morgan = require('morgan');
-const logger = require('./utils/logger');
-const { connectDatabase } = require('./config/database');
-const errorHandler = require('./middleware/errorHandler');
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/users');
+const logger = require('./src/utils/logger');
+const { connectDatabase } = require('./src/config/database');
+const errorHandler = require('./src/middleware/errorHandler');
+const authRoutes = require('./src/routes/auth');
+const userRoutes = require('./src/routes/users');
 const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./config/swagger');
+const swaggerSpec = require('./src/config/swagger');
+const productsRoutes = require('./src/routes/products');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -43,7 +44,7 @@ app.get('/', (req, res) => {
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/products', require('./routes/products'));
+app.use('/api/products', productsRoutes);
 
 // swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
